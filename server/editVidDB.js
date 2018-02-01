@@ -1,56 +1,11 @@
 import { Meteor } from 'meteor/meteor';
-import '../imports/api/videoDB.js';
 import '../imports/api/vidFav.js';
-import { videoDB1 } from '../imports/api/videoDB.js';
-import { videoDB2 } from '../imports/api/videoDB.js';
-import { videoDB3 } from '../imports/api/videoDB.js';
+
 import { likes } from '../imports/api/vidFav.js';
 import { dislikes } from '../imports/api/vidFav.js';
 
 
 Meteor.methods({
-	addVid(type,src,min,sec){
-		switch (type) {
-			case 1:
-			videoDB1.insert({
-				src: YouTubeGetID(src),
-				time: (min * 60 + sec - 1),
-				likes: 0,
-				dislikes: 0,
-			});
-			break;
-			case 2:
-			videoDB2.insert({
-				src: YouTubeGetID(src),
-				time: (min * 60 + sec - 1),
-				likes: 0,
-				dislikes: 0,
-			});
-			break;
-			case 3:
-			videoDB3.insert({
-				src: YouTubeGetID(src),
-				time: (min * 60 + sec - 1),
-				likes: 0,
-				dislikes: 0,
-			});
-			break;
-		}
-		console.log("added " + YouTubeGetID(src));
-	},
-	removeVid(currentChannel,currentVid){
-		switch (currentChannel) {
-				case '1':
-				videoDB1.remove({src: currentVid.src});
-				break;
-				case '2':
-				videoDB2.remove({src: currentVid.src});
-				break;
-				case '3':
-				videoDB3.remove({src: currentVid.src});
-				break;
-			}
-	},
 	likeVid(currentChannel,currentVid){
 		var alreadyliked = likes.find({user:Meteor.userId(),vid:currentVid.src},{limit:1}).count();
 		var alreadydisliked = dislikes.find({user:Meteor.userId(),vid:currentVid.src},{limit:1}).count();

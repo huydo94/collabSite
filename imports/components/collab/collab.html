@@ -1,22 +1,15 @@
 <br>
 <br>
+<div id="channelQ"></div>
 
-<div>
-	<form ng-submit="$ctrl.addVid()">
-    URL: <input ng-model="$ctrl.src" type="text" name="text"" required="" /> <br>
-    Min: <input ng-model="$ctrl.min" type="number" /> Sec: <input ng-model="$ctrl.sec" type="number" required="" /><br>
-    <input type="submit" value="Add Video To Queue"/>
-	</form>
+<div id="theremote">
+    <div>
+        <button id="spin" title="Catch upp" ng-click="$ctrl.synchronize();"></button>
+        <button id="off"  ng-click="$ctrl.turnOn();"></button>
+    </div>
+
+    <div id="extras">
+        <button id="like" ng-click="$ctrl.like();"></button>
+        <button id="dislike" ng-click="$ctrl.dislike();"></button>
+    </div>
 </div>
-<button ng-click="$ctrl.turnOn()"> Turn On </button>
-
-<button ng-click="$ctrl.synchronize()"> Sync </button>
-
-<ul id="sortable" >
-<li ng-repeat="vid in $ctrl.queue">
-   Order: {{vid.idx}} URL:  {{vid.src}}
-   <button ng-click="$ctrl.deleteVid(vid.idx)"> Delete </button>
-</li>
-</ul>
-
- <div id="channelQ"></div>

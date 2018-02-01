@@ -1,7 +1,6 @@
 import angular from 'angular';
 import angularMeteor from 'angular-meteor';
 import template from './collab.html';
-import { theQueue } from '../../api/queue.js';
 
 var currentVid;
 var player;
@@ -11,21 +10,15 @@ class collabCtrl{
         $scope.viewModel(this);
         this.subscribe('theQueue');
         this.helpers({
-        	queue(){
-        		return theQueue.find({},{sort:{idx:1}});
-        	}
         });
     }
-    addVid(){
-    	var totalMins = this.min * 60 + this.sec - 1;
-    	Meteor.call('addToQueue',this.src,totalMins);
-        this.src = '';
-        this.min = '';
-        this.sec = '';
+    like(){
+        Meteor.call('likeVid',currentVid);
     }
-    deleteVid(idx){
-        Meteor.call("removefromQ",idx);
+    dislike(){
+        Meteor.call('dislikeVid',currentVid);
     }
+
     synchronize() {
         synchronize();
     }
@@ -92,14 +85,6 @@ $(function(){
     $( "#sortable" ).disableSelection();
 });
 
-var map;
-      function initMap() {
-        map = new google.maps.Map(document.getElementById('map'), {
-          center: {lat: -34.397, lng: 150.644},
-          zoom: 8
-        });
-      }
-      
 
 export default angular.module('collab', [
     angularMeteor

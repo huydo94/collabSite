@@ -1,12 +1,12 @@
 import angular from 'angular';
 import angularMeteor from 'angular-meteor';
-import watch from '../imports/components/watch/watch';
+import collab from '../imports/components/collab/collab';
 import chat  from '../imports/components/chat/chat';
 import '../imports/startup/accounts-config.js';
 
 angular.module('trilltv', [
   angularMeteor,
-  watch.name,
+  collab.name,
   chat.name,
   'accounts.ui'
 ]);

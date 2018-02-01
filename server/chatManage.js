@@ -1,9 +1,6 @@
 import { Meteor } from 'meteor/meteor';
 import '../imports/api/messages.js';
-import { messages1 } from '../imports/api/messages.js';
-import { messages2 } from '../imports/api/messages.js';
-import { messages3 } from '../imports/api/messages.js';
-import { privateMsgs } from '../imports/api/messages.js';
+import { messages } from '../imports/api/messages.js';
 
 import { check } from 'meteor/check';
 
@@ -19,57 +16,15 @@ Accounts.onCreateUser(function(options, user) {
 });
 
 Meteor.methods({
-	addMsg(newMsg,currentChannel){
+	addMsg(newMsg){
 		check(newMsg, String);
 		newMsg = Emojis.parse(newMsg);
-		switch(currentChannel){
-			case '1':
-			messages1.insert({
+
+			messages.insert({
 				color:Meteor.user().profile.color,
 				text:newMsg,
 				user: Meteor.user().username,
 			});
-			break;
-			case '2':
-			messages2.insert({
-				color:Meteor.user().profile.color,
-				text:newMsg,
-				user: Meteor.user().username,
-			});
-			break;
-			case '3':
-			messages3.insert({
-				color:Meteor.user().profile.color,
-				text:newMsg,
-				user: Meteor.user().username,
-			});
-			break;
-			default:
-			break;
+
 		}
-
-	},
-
-	addprivateMsg(newMsg,receiver){
-
-		check(newMsg,String);
-		newMsg = Emojis.parse(newMsg);
-		var sender = Meteor.user().username;
-		// var pairexisted = privateMsgs.find({pairs:{$all:[sender,receiver]}},{limit:1}).count();
-		// if(pairexisted == 0){
-		// 	privateMsgs.insert({pairs:[sender,receiver],messages:[]});
-		// }
-		// privateMsgs.update(
-		// 	{pairs:{$all:[sender,receiver]}},
-		// 	{$push:{messages:{text:newMsg,sender:sender}}}
-		// );
-		privateMsgs.insert({
-			sender: sender,
-			receiver:receiver,
-			text:newMsg,
-			createdAt: new Date
-		});
-	}
-
-
 });

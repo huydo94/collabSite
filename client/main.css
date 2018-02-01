@@ -42,15 +42,15 @@ body,html {
   position:fixed;
 }
 
-#chats,#privatechats {
+#chats,#queue {
   /*background:blue;*/
-  color:black;
+  color:white;
   height:100%;
   width: 100%;
   top:10;
   position:absolute;
 }
-#msgBox,#privatemsgBox,#manageFriends {
+#msgBox{
   position:absolute;
   overflow-x:hidden;
   overflow-y:scroll;
@@ -75,60 +75,19 @@ body,html {
   border: 2px solid black;
   border-radius: 4px;
 }
-.convo{
-  border: 2px solid black;
-  cursor:pointer;
-  width:50%;
-  float:left;
-  padding:5px;
-  margin:9px;
-}
+
 .textmsg{
   word-wrap: break-word;
 }
-#channel,#channelQ{
+#channelQ{
   width: 73%;
   border: 2px solid black;
 }
-#channelselect{
-  display: inline-block;
-}
+
 #extras{
   display: inline-block;
 }
-.channelbtn{
-  height: 25px;
-  width:25px;
-  border: none;
-  border-radius: 50%;
-  color:white;
-  background-color:black;
-}
-.channelbtn:hover{
-  background-color: mistyrose;
-}
-#button1:hover{
-  background-color: green !important;
-}
-#button2:hover{
-  background-color: yellow !important;
-}
-#button3:hover{
-  background-color: red !important;
-}
-#theremote{
-  background: rgba(255, 255, 255, 0.7);
-  position: absolute;
-  padding:0px 1px 48px 1px;
-  text-align: center;
-  right:27%;
-  width:90px;
-  border-radius: 5px;
-  z-index: 999;
-}
-#theremote:hover{
-  background: rgba(255, 255, 255, 0.9);
-}
+
 .chatBtn{
   width:48%;
   height:30px;
@@ -149,36 +108,6 @@ body,html {
 .rmBtn:hover{
   background: rgba(255, 0, 0, 1);
 }
-#backBtn {
-  display: inline-block;
-  vertical-align: middle;
-  -webkit-transform: perspective(1px) translateZ(0);
-  transform: perspective(1px) translateZ(0);
-  box-shadow: 0 0 1px transparent;
-  position: relative;
-  padding-left: 2.2em;
-  -webkit-transition-duration: 0.1s;
-  transition-duration: 0.1s;
-}
-#backBtn:before {
-  content: "\f137";
-  position: absolute;
-  left: 1em;
-  padding: 2px 1px 1px 1px;
-  font-family: FontAwesome;
-  -webkit-transform: translateZ(0);
-  transform: translateZ(0);
-  -webkit-transition-duration: 0.1s;
-  transition-duration: 0.1s;
-  -webkit-transition-property: transform;
-  transition-property: transform;
-  -webkit-transition-timing-function: ease-out;
-  transition-timing-function: ease-out;
-}
-#backBtn:hover:before, #backBtn:focus:before, #backBtn:active:before {
-  -webkit-transform: translateX(-4px);
-  transform: translateX(-4px);
-}
 button.usernames { background:none;border:none;font-size:16px; }
 button{
   cursor:pointer;
@@ -188,102 +117,20 @@ button{
   outline:none;
 }
 
-::-webkit-scrollbar {
-  width: 0.8em;
-}
-
-::-webkit-scrollbar-track {
-  -webkit-box-shadow: inset 0 0 6px rgba(0,0,0,0.5);
-}
-
-::-webkit-scrollbar-thumb {
-  background: rgba(255,255,255,0.5);
-}
-
-
-/* Icon Wobble Horizontal */
-@-webkit-keyframes convo {
-  16.65% {
-    -webkit-transform: translateX(6px);
-    transform: translateX(6px);
-  }
-  33.3% {
-    -webkit-transform: translateX(-5px);
-    transform: translateX(-5px);
-  }
-  49.95% {
-    -webkit-transform: translateX(4px);
-    transform: translateX(4px);
-  }
-  66.6% {
-    -webkit-transform: translateX(-2px);
-    transform: translateX(-2px);
-  }
-  83.25% {
-    -webkit-transform: translateX(1px);
-    transform: translateX(1px);
-  }
-  100% {
-    -webkit-transform: translateX(0);
-    transform: translateX(0);
-  }
-}
-@keyframes convo {
-  16.65% {
-    -webkit-transform: translateX(6px);
-    transform: translateX(6px);
-  }
-  33.3% {
-    -webkit-transform: translateX(-5px);
-    transform: translateX(-5px);
-  }
-  49.95% {
-    -webkit-transform: translateX(4px);
-    transform: translateX(4px);
-  }
-  66.6% {
-    -webkit-transform: translateX(-2px);
-    transform: translateX(-2px);
-  }
-  83.25% {
-    -webkit-transform: translateX(1px);
-    transform: translateX(1px);
-  }
-  100% {
-    -webkit-transform: translateX(0);
-    transform: translateX(0);
-  }
-}
-.convo {
-  display: inline-block;
-  vertical-align: middle;
-  -webkit-transform: perspective(1px) translateZ(0);
-  transform: perspective(1px) translateZ(0);
-  box-shadow: 0 0 1px transparent;
-  position: relative;
-  padding-right: 2.2em;
-  -webkit-transition-duration: 0.3s;
-  transition-duration: 0.3s;
-}
-.convo:before {
-  content: "\f061";
+#theremote{
+  background: rgba(255, 255, 255, 0.7);
   position: absolute;
-  right: 1em;
-  padding: 0 1px;
-  font-family: FontAwesome;
-  -webkit-transform: translateZ(0);
-  transform: translateZ(0);
+  padding:0px 1px 48px 1px;
+  text-align: center;
+  right:27%;
+  width:90px;
+  border-radius: 5px;
+  z-index: 999;
 }
-.convo:hover:before, .convo:focus:before, .convo:active:before {
-  -webkit-animation-name: convo;
-  animation-name: convo;
-  -webkit-animation-duration: 1s;
-  animation-duration: 1s;
-  -webkit-animation-timing-function: ease-in-out;
-  animation-timing-function: ease-in-out;
-  -webkit-animation-iteration-count: 1;
-  animation-iteration-count: 1;
+#theremote:hover{
+  background: rgba(255, 255, 255, 0.9);
 }
+
 
 #like {
   position: relative;
@@ -339,30 +186,6 @@ button{
   transition-timing-function: cubic-bezier(0.47, 2.02, 0.31, -0.36);
 }
 
-#spin {
-  width:30px;
-  height: 20px;
-  margin-bottom: 15px;
-  position: relative;
-  background: transparent;
-}
-#spin:before {
-  content: "\f021";
-  position: absolute;
-  right:10px;
-  font-family: FontAwesome;
-  -webkit-transition-duration: 1s;
-  transition-duration: 1s;
-  -webkit-transition-property: transform;
-  transition-property: transform;
-  -webkit-transition-timing-function: ease-in-out;
-  transition-timing-function: ease-in-out;
-}
-#spin:hover:before, #spin:focus:before, #spin:active:before {
-  -webkit-transform: rotate(360deg);
-  transform: rotate(360deg);
-}
-
 /* Icon Grow */
 #off {
   width:30px;
@@ -390,7 +213,26 @@ button{
   transform: scale(1.3) translateZ(0);
 }
 
-#publicBanner{
-  color: white;
-  text-align: center;
+#spin {
+  width:30px;
+  height: 20px;
+  margin-bottom: 15px;
+  position: relative;
+  background: transparent;
+}
+#spin:before {
+  content: "\f021";
+  position: absolute;
+  right:10px;
+  font-family: FontAwesome;
+  -webkit-transition-duration: 1s;
+  transition-duration: 1s;
+  -webkit-transition-property: transform;
+  transition-property: transform;
+  -webkit-transition-timing-function: ease-in-out;
+  transition-timing-function: ease-in-out;
+}
+#spin:hover:before, #spin:focus:before, #spin:active:before {
+  -webkit-transform: rotate(360deg);
+  transform: rotate(360deg);
 }
