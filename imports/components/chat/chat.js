@@ -8,7 +8,8 @@ import { friendships } from '../../api/friendsDB.js';
 import { privateMsgs } from '../../api/messages.js';
 import { Session } from 'meteor/session'
 
-var currentFriend;
+var currentFriend = null;
+var currentChannel;
 var timeloggedin = new Date;
 var guest = {
   "background" : "rgba(137, 255, 47, 0.3)",
@@ -47,15 +48,18 @@ class chatCtrl {
         added: function(id, doc) {
           if(!init) return;
           var sender = privateMsgs.findOne({_id:id}).sender;
-          if(sender != Meteor.user().username){
-            alert(sender+" sent you a message.");
+          console.log(currentFriend);
+          if(sender != Meteor.user().username && sender != currentFriend){
+            $(".chatBtn").eq(1).html('Friends (*)');
+            $('.convo:contains("'+sender+'")').css('background-color', 'red');
+            //alert(sender+" sent you a message.");
           }
         }
       });
     });
     this.helpers({
       messages() {
-        var currentChannel = Session.get('currentChannel');
+        currentChannel = Session.get('currentChannel');
         switch(currentChannel){
           case '1':
           return messages1.find({});
@@ -82,7 +86,11 @@ class chatCtrl {
 
     });
   }
+  channel(){
+    return currentChannel;
+  }
   selectFriend(friend){
+    $('.convo:contains("'+friend+'")').css('background-color', 'transparent');
     Session.set('currentFriend',friend);
   }
   addprivateMsg(newPM){
@@ -167,6 +175,7 @@ class chatCtrl {
   friendBtn(){
     $(".chatBtn")[0].style.background = 'rgba(0, 0, 0, 1)';
     $(".chatBtn")[1].style.background = 'rgba(0, 0, 0, 0)';
+    $(".chatBtn").eq(1).html('Friends');
   }
 
 }
