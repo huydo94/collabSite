@@ -33,10 +33,9 @@ setInterval(function(){
 },1000);
 
 Meteor.methods({
-    addToQueue(src,time){
+    addToQueue(src,time,title,imgURL){
         totalVid++;
-        var convertedSrc = YouTubeGetID(src);
-        var vid = {src:convertedSrc,time:time,idx:totalVid};
+        var vid = {src:src,time:time,idx:totalVid,title:title,imgURL:imgURL};
         theQueue.insert(vid);
     },
     getVidQ(){
@@ -57,20 +56,11 @@ Meteor.methods({
         totalVid--;
         theQueue.remove({idx:index});
         theQueue.update({idx:{$gt:index}},{$inc:{idx:-1}},{multi:true});
+    },
+    seekTo(newTime){
+        curtime = newTime;
     }
 });
-
-function YouTubeGetID(url) {
-    var ID = '';
-    url = url.replace(/(>|<)/gi, '').split(/(vi\/|v=|\/v\/|youtu\.be\/|\/embed\/)/);
-    if (url[2] !== undefined) {
-        ID = url[2].split(/[^0-9a-z_\-]/i);
-        ID = ID[0];
-    } else {
-        ID = url;
-    }
-    return ID;
-}
 
 Meteor.startup(() => {
     // code to run on server at startup

@@ -8,7 +8,6 @@ var player;
 class collabCtrl{
 	constructor($scope) {
         $scope.viewModel(this);
-        this.subscribe('theQueue');
         this.helpers({
         });
     }
@@ -22,10 +21,12 @@ class collabCtrl{
     synchronize() {
         synchronize();
     }
+    emitTime(){
+        Meteor.call("seekTo",player.getCurrentTime());
+    }
     turnOn(){
     	Meteor.call("getVidQ", function(error, result) {
             currentVid = result;
-            console.log(result);
             if (Meteor.isClient) {
                 onYouTubeIframeAPIReady = function() {
                     player = new YT.Player("channelQ", {

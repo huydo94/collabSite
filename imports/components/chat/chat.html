@@ -22,15 +22,14 @@
 		<div>
 			<form ng-submit="$ctrl.addVid()">
 				URL: <input ng-model="$ctrl.src" type="text" name="text"" required="" /> <br>
-				Min: <input ng-model="$ctrl.min" type="number" /> <br>
-				Sec: <input ng-model="$ctrl.sec" type="number" required="" /><br>
 				<input type="submit" value="Add Video To Queue"/>
 			</form>
 		</div>
 
 		<ul id="sortable" >
 			<li ng-repeat="vid in $ctrl.queue">
-				Order: {{vid.idx}} URL:  {{vid.src}}
+				<img class="thumbnail" ng-src="{{vid.imgURL}}"" height="56" width="100">
+				<span class="vidtitle">{{vid.title}}</span>
 				<button ng-click="$ctrl.deleteVid(vid.idx)"> Delete </button>
 			</li>
 		</ul>

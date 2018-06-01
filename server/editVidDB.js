@@ -3,13 +3,13 @@ import '../imports/api/vidFav.js';
 
 import { likes } from '../imports/api/vidFav.js';
 import { dislikes } from '../imports/api/vidFav.js';
+import {theQueue} from "../imports/api/queue.js";
 
 
 Meteor.methods({
-	likeVid(currentChannel,currentVid){
+	likeVid(currentVid){
 		var alreadyliked = likes.find({user:Meteor.userId(),vid:currentVid.src},{limit:1}).count();
 		var alreadydisliked = dislikes.find({user:Meteor.userId(),vid:currentVid.src},{limit:1}).count();
-		console.log(alreadyliked);
 		if(alreadyliked){
 			return;
 		}
@@ -17,35 +17,16 @@ Meteor.methods({
 			dislikes.remove({user:Meteor.userId(),vid:currentVid.src});
 			likes.insert({user:Meteor.userId(),vid:currentVid.src});
 
-			switch (currentChannel) {
-				case '1':
-				videoDB1.update({src: currentVid.src},{$inc:{likes:1,dislikes:-1}});
-				break;
-				case '2':
-				videoDB2.update({src: currentVid.src},{$inc:{likes:1,dislikes:-1}});
-				break;
-				case '3':
-				videoDB3.update({src: currentVid.src},{$inc:{likes:1,dislikes:-1}});
-				break;
-			}
+			theQueue.update({src: currentVid.src},{$inc:{likes:1,dislikes:-1}});
+
 			return;
 
 		}
 		likes.insert({user:Meteor.userId(),vid:currentVid.src});
-		switch (currentChannel) {
-			case '1':
-			videoDB1.update({src: currentVid.src},{$inc:{likes:1}});
-			break;
-			case '2':
-			videoDB2.update({src: currentVid.src},{$inc:{likes:1}});
-			break;
-			case '3':
-			videoDB3.update({src: currentVid.src},{$inc:{likes:1}});
-			break;
-		}
+        theQueue.update({src: currentVid.src},{$inc:{likes:1}});
 
 	},
-	dislikeVid(currentChannel,currentVid){
+	dislikeVid(currentVid){
 		var alreadyliked = likes.find({user:Meteor.userId(),vid:currentVid.src},{limit:1}).count();
 		var alreadydisliked = dislikes.find({user:Meteor.userId(),vid:currentVid.src},{limit:1}).count();
 
@@ -55,48 +36,15 @@ Meteor.methods({
 		if(alreadyliked){
 			likes.remove({user:Meteor.userId(),vid:currentVid.src});
 			dislikes.insert({user:Meteor.userId(),vid:currentVid.src});
-
-			switch (currentChannel) {
-				case '1':
-				videoDB1.update({src: currentVid.src},{$inc:{likes:-1,dislikes:1}});
-				break;
-				case '2':
-				videoDB2.update({src: currentVid.src},{$inc:{likes:-1,dislikes:1}});
-				break;
-				case '3':
-				videoDB3.update({src: currentVid.src},{$inc:{likes:-1,dislikes:1}});
-				break;
-			}
+			theQueue.update({src: currentVid.src},{$inc:{likes:-1,dislikes:1}});
 			return;
 
 		}
 		dislikes.insert({user:Meteor.userId(),vid:currentVid.src});
-		switch (currentChannel) {
-			case '1':
-			videoDB1.update({src: currentVid.src},{$inc:{dislikes:1}});
-			break;
-			case '2':
-			videoDB2.update({src: currentVid.src},{$inc:{dislikes:1}});
-			break;
-			case '3':
-			videoDB3.update({src: currentVid.src},{$inc:{dislikes:1}});
-			break;
-		}
+        theQueue.update({src: currentVid.src},{$inc:{dislikes:1}});
 
 	}
 });
-
-function YouTubeGetID(url) {
-	var ID = '';
-	url = url.replace(/(>|<)/gi, '').split(/(vi\/|v=|\/v\/|youtu\.be\/|\/embed\/)/);
-	if (url[2] !== undefined) {
-		ID = url[2].split(/[^0-9a-z_\-]/i);
-		ID = ID[0];
-	} else {
-		ID = url;
-	}
-	return ID;
-}
 
 Meteor.startup(() => {
   // code to run on server at startup

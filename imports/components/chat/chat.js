@@ -2,12 +2,14 @@ import angular from 'angular';
 import angularMeteor from 'angular-meteor';
 import template from './chat.html';
 import { messages } from '../../api/messages.js';
-import {theQueue} from "../../api/queue";
+import { theQueue } from '../../api/queue.js';
+import {parse,toSeconds} from 'iso8601-duration';
 
 class chatCtrl {
     constructor($scope) {
         $scope.viewModel(this);
         this.subscribe('messages');
+        this.subscribe('theQueue');
 
         this.helpers({
             messages() {
@@ -20,11 +22,19 @@ class chatCtrl {
     }
 
     addVid(){
-        var totalMins = this.min * 60 + this.sec - 1;
-        Meteor.call('addToQueue',this.src,totalMins);
+        var videoid = YouTubeGetID(this.src);
+        $.getJSON("https://www.googleapis.com/youtube/v3/videos", {
+            key: "AIzaSyB2jJKeXzATYjACSJuCju5Chx5B4tmrI3k",
+            part: "snippet,contentDetails",
+            id: videoid
+        }, function(data) {
+            var title = data.items[0].snippet.title;
+            var imgURL = data.items[0].snippet.thumbnails.medium.url;
+            var durationStr = data.items[0].contentDetails.duration;
+            var duration = Math.round(toSeconds(parse(durationStr)));
+            Meteor.call('addToQueue',videoid,duration,title,imgURL);
+        });
         this.src = '';
-        this.min = '';
-        this.sec = '';
     }
     deleteVid(idx){
         Meteor.call("removefromQ",idx);
@@ -61,6 +71,19 @@ class chatCtrl {
     }
 
 }
+
+function YouTubeGetID(url) {
+    var ID = '';
+    url = url.replace(/(>|<)/gi, '').split(/(vi\/|v=|\/v\/|youtu\.be\/|\/embed\/)/);
+    if (url[2] !== undefined) {
+        ID = url[2].split(/[^0-9a-z_\-]/i);
+        ID = ID[0];
+    } else {
+        ID = url;
+    }
+    return ID;
+}
+
 $(function() {
     $(".inputBox").keypress(function (e) {
         if(e.which == 13) {
