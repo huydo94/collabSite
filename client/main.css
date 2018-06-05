@@ -61,6 +61,7 @@ ul{
 .vidtitle{
   margin: 5px;
   font-size: 13px;
+  width: 70%;
 }
 
 .deleteVid {
