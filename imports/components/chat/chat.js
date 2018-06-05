@@ -40,6 +40,13 @@ class chatCtrl {
         Meteor.call("removefromQ",idx);
     }
 
+    selectVid(idx){
+        Meteor.call("selectVid",idx);
+        setTimeout(function() {
+            synchronize();
+        }, 1000);
+    }
+
     myColor(){
         return Meteor.user().profile.color;
     }
@@ -103,8 +110,8 @@ $(function() {
 
 export default angular.module('chat', [
     angularMeteor
-])
-    .component('chat', {
-        templateUrl: 'imports/components/chat/chat.html',
-        controller: ['$scope', chatCtrl]
-    });
+    ])
+.component('chat', {
+    templateUrl: 'imports/components/chat/chat.html',
+    controller: ['$scope', chatCtrl]
+});

@@ -59,6 +59,11 @@ Meteor.methods({
     },
     seekTo(newTime){
         curtime = newTime;
+    },
+    selectVid(index){
+        lengthCurVid = 0;
+        curtime = 0;
+        curidx = index-1;
     }
 });
 

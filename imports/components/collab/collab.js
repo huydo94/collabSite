@@ -52,13 +52,13 @@ class collabCtrl{
     }
 }
 
-function synchronize(){
+synchronize = function(){
     Meteor.call("getVidQ", function(error, result) {
         currentVid = result;
         player.loadVideoById(currentVid.src, 0, "default");
         player.seekTo(currentVid.time, true);
     });
-}
+};
 
 
 function onPlayerStateChange(event) {
@@ -84,6 +84,7 @@ $(function(){
       }
   });
     $( "#sortable" ).disableSelection();
+    $( "#sortable" ).sortable({ axis: "y" });
 });
 
 

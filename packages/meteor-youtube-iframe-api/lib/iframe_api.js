@@ -40,7 +40,7 @@ YT.load = function () {
             $(document).ready(function () {
                 var a = document.createElement('script');
                 a.id = 'www-widgetapi-script';
-                a.src = 'https:' + '//s.ytimg.com/yts/jsbin/www-widgetapi-vfluxKqfs/www-widgetapi.js';
+                a.src = 'https:' + '//s.ytimg.com/yts/jsbin/www-widgetapi-vflQSvpsZ/www-widgetapi.js';
                 $("head").append(a);
             });
         })();

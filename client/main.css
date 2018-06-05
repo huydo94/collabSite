@@ -56,9 +56,22 @@ ul{
 }
 
 .thumbnail{
-  float:left;
+  cursor:pointer;
 }
 .vidtitle{
+  margin: 5px;
+}
+.deleteVid{
+
+}
+.videoItem{
+  display: flex; 
+  align-items: center;
+  margin:10px;
+}
+#sortable{
+  padding-left: 10px;
+
 }
 #msgBox{
   position:absolute;
@@ -91,7 +104,6 @@ ul{
 }
 #channelQ{
   width: 73%;
-  border: 2px solid black;
 }
 
 #extras{
