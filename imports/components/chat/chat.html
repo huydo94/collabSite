@@ -1,6 +1,6 @@
 <div id="social">
 	<button class="chatBtn" ng-click="public = true;queue = false; $ctrl.publicBtn();">
-		Public
+		Chat
 	</button>
 	<button class="chatBtn" ng-click="queue =true; public = false;$ctrl.friendBtn();">
 		Queue
@@ -21,8 +21,8 @@
 	<div id="queue" ng-show="queue">
 		<div>
 			<form ng-submit="$ctrl.addVid()">
-				URL: <input ng-model="$ctrl.src" type="text" name="text"" required="" /> <br>
-				<input type="submit" value="Add Video To Queue"/>
+				<input class="inputBoxURL" ng-model="$ctrl.src" type="text" placeholder="Paste video URL and Enter to add" required="" />
+				<input type="submit" class="submit" style="display: none" />
 			</form>
 		</div>
 
@@ -31,7 +31,7 @@
 				<div class="videoItem">
 					<img class="thumbnail" ng-src="{{vid.imgURL}}" ng-click="$ctrl.selectVid(vid.idx)" height="56" width="100">
 					<span class="vidtitle">{{vid.title}}</span>
-					<button class="deleteVid" ng-click="$ctrl.deleteVid(vid.idx)">X</button>
+					<button class="deleteVid" ng-click="$ctrl.deleteVid(vid.idx)"></button>
 				</div>
 			</li>
 		</ul>
