@@ -5,11 +5,27 @@ import { messages } from '../../api/messages.js';
 import { theQueue } from '../../api/queue.js';
 import {parse,toSeconds} from 'iso8601-duration';
 
+var timeloggedin = new Date;
+var currentView = "chat";
+
 class chatCtrl {
     constructor($scope) {
         $scope.viewModel(this);
-        this.subscribe('messages');
+
         this.subscribe('theQueue');
+
+        this.subscribe('messages', function() {
+          var init = messages.find({createdAt:{$gt:timeloggedin}}).observeChanges({
+            added: function(id, doc) {
+              if(!init) return;
+              var sender = messages.findOne({_id:id}).user;
+              if(sender != Meteor.user().username && currentView != "chat"){
+                $(".chatBtn").eq(0).html('Chat (*)');
+                document.title = "trill.tube (1)";
+              }  
+             }
+          });
+        });
 
         this.helpers({
             messages() {
@@ -71,10 +87,14 @@ class chatCtrl {
     publicBtn(){
         $(".chatBtn")[0].style.background = 'rgba(0, 0, 0, 0)';
         $(".chatBtn")[1].style.background = 'rgba(0, 0, 0, 1)';
+        $(".chatBtn").eq(0).html('Chat');
+        document.title = "trill.tube";
+        currentView = "chat";
     }
     friendBtn(){
         $(".chatBtn")[0].style.background = 'rgba(0, 0, 0, 1)';
         $(".chatBtn")[1].style.background = 'rgba(0, 0, 0, 0)';
+        currentView = "queue"
     }
 
 }

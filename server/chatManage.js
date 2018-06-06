@@ -24,6 +24,7 @@ Meteor.methods({
 				color:Meteor.user().profile.color,
 				text:newMsg,
 				user: Meteor.user().username,
+				createdAt: new Date
 			});
 
 		}

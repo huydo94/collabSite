@@ -84,7 +84,12 @@ $(function(){
       }
   });
     $( "#sortable" ).disableSelection();
-    $( "#sortable" ).sortable({ axis: "y" });
+    $( "#sortable" ).sortable({ 
+        axis: "y",
+        classes: {
+            "ui-sortable": "highlight"
+        }
+    });
 });
 
 

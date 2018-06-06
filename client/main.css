@@ -95,6 +95,12 @@ ul{
   align-items: center;
   margin:10px;
 }
+.videoItem:active{
+  display: flex; 
+  align-items: center;
+  margin:10px;
+  background: rgba(0,0,0,.5);
+}
 #sortable{
   padding-left: 10px;
 
