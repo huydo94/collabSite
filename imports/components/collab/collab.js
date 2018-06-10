@@ -7,8 +7,6 @@ var player;
 var prevVidId;
 var currentVidId;
 
-$(document).tooltip({show: null});
-
 class collabCtrl{
 	constructor($scope) {
         $scope.viewModel(this);
@@ -103,6 +101,7 @@ $(function(){
             "ui-sortable": "highlight"
         }
     });
+    $(".remoteControl").tooltip({ show: null});
 });
 
 
