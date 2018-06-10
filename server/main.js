@@ -57,7 +57,7 @@ Meteor.methods({
         theQueue.remove({idx:index});
         theQueue.update({idx:{$gt:index}},{$inc:{idx:-1}},{multi:true});
     },
-    seekTo(newTime){
+    updateTime(newTime){
         curtime = newTime;
     },
     selectVid(index){

@@ -24,7 +24,7 @@ class collabCtrl{
         synchronize();
     }
     emitTime(){
-        Meteor.call("seekTo",player.getCurrentTime());
+        Meteor.call("updateTime",player.getCurrentTime());
     }
     turnOn(){
     	Meteor.call("getVidQ", function(error, result) {
@@ -63,8 +63,7 @@ synchronize = function(){
         currentVidId = currentVid.idx;
         $('#'+prevVidId).css("font-weight","normal");
         $('#'+currentVidId).css("font-weight","Bold");
-        player.loadVideoById(currentVid.src, 0, "default");
-        player.seekTo(currentVid.time, true);
+        player.loadVideoById(currentVid.src, currentVid.time, "default");
     });
 };
 
