@@ -28,7 +28,7 @@
 
 		<ul id="sortable" >
 			<li ng-repeat="vid in $ctrl.queue">
-				<div class="videoItem">
+				<div class="videoItem" id={{vid.idx}}>
 					<img class="thumbnail" ng-src="{{vid.imgURL}}" ng-click="$ctrl.selectVid(vid.idx)" height="56" width="100">
 					<span class="vidtitle">{{vid.title}}</span>
 					<button class="deleteVid" ng-click="$ctrl.deleteVid(vid.idx)"></button>

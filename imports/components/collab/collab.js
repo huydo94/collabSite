@@ -4,6 +4,8 @@ import template from './collab.html';
 
 var currentVid;
 var player;
+var prevVidId;
+var currentVidId;
 
 class collabCtrl{
 	constructor($scope) {
@@ -27,6 +29,8 @@ class collabCtrl{
     turnOn(){
     	Meteor.call("getVidQ", function(error, result) {
             currentVid = result;
+            currentVidId = currentVid.idx;
+            $('#'+currentVidId).css("font-weight","Bold");
             if (Meteor.isClient) {
                 onYouTubeIframeAPIReady = function() {
                     player = new YT.Player("channelQ", {
@@ -55,6 +59,10 @@ class collabCtrl{
 synchronize = function(){
     Meteor.call("getVidQ", function(error, result) {
         currentVid = result;
+        prevVidId = currentVidId;
+        currentVidId = currentVid.idx;
+        $('#'+prevVidId).css("font-weight","normal");
+        $('#'+currentVidId).css("font-weight","Bold");
         player.loadVideoById(currentVid.src, 0, "default");
         player.seekTo(currentVid.time, true);
     });
@@ -65,6 +73,10 @@ function onPlayerStateChange(event) {
     if (event.data == 0) {
         Meteor.call("getVidQ", function(error, result) {
             currentVid = result;
+            prevVidId = currentVidId;
+            currentVidId = currentVid.idx;
+            $('#'+prevVidId).css("font-weight","normal");
+            $('#'+currentVidId).css("font-weight","Bold");
             event.target.loadVideoById(currentVid.src, 0, "default");
         });
     }
