@@ -7,6 +7,8 @@ var player;
 var prevVidId;
 var currentVidId;
 
+$(document).tooltip({show: null});
+
 class collabCtrl{
 	constructor($scope) {
         $scope.viewModel(this);

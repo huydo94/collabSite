@@ -47,6 +47,50 @@ ul{
   position:fixed;
 }
 
+#login-dropdown-list{
+  background: rgba(0, 0, 0);
+}
+
+#login-buttons .login-button,
+.accounts-dialog .login-button {
+  cursor: pointer;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  -o-user-select: none;
+  user-select: none;
+  padding: 4px 8px;
+  font-size: 80%;
+  font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+  line-height: 1.5;
+  text-align: center;
+  color: white;
+  background: black;
+  border: 1px solid white;
+  border-radius: 4px;
+}
+
+#login-buttons .login-button:hover,
+.accounts-dialog .login-button:hover {
+  background: grey;
+}
+
+#login-buttons .login-button:active,
+.accounts-dialog .login-button:active {
+  background: white;
+  box-shadow: 0 2px 3px 0 rgba(0, 0, 0, 0.2) inset;
+  -webkit-box-shadow: 0 2px 3px 0 rgba(0, 0, 0, 0.2) inset;
+}
+
+.accounts-dialog * {
+  padding: 0;
+  margin: 0;
+  line-height: inherit;
+  color: #6f6f6f;
+  font: inherit;
+  font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+}
+
 #social {
   background: rgba(0, 0, 0, 0.5);
   color:black;
