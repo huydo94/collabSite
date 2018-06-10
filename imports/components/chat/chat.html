@@ -18,11 +18,11 @@
 		</form>
 	</div>
 
-	<div id="queue" ng-show="queue">
+	<div ng-show="queue">
 		<div>
 			<form ng-submit="$ctrl.addVid()">
-				<input class="inputBoxURL" ng-model="$ctrl.src" type="text" placeholder="Paste video URL and Enter to add" required="" />
 				<input type="submit" class="submit" style="display: none" />
+				<input class="inputBoxURL" ng-model="$ctrl.src" type="text" placeholder="Paste video URL and Enter to add" required="" />
 			</form>
 		</div>
 

@@ -34,6 +34,10 @@ setInterval(function(){
 
 Meteor.methods({
     addToQueue(src,time,title,imgURL){
+        var existed = theQueue.findOne({src:src});
+        if (existed != null){
+            return;
+        }
         totalVid++;
         var vid = {src:src,time:time,idx:totalVid,title:title,imgURL:imgURL};
         theQueue.insert(vid);
