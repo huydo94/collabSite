@@ -25,6 +25,10 @@ class collabCtrl{
     }
     emitTime(){
         Meteor.call("updateTime",player.getCurrentTime());
+        Meteor.call('addMsg',"check out where I'm at!");
+        $('#msgBox').stop().animate({
+            scrollTop: $('#msgBox')[0].scrollHeight
+        }, 800);
     }
     turnOn(){
     	Meteor.call("getVidQ", function(error, result) {
@@ -40,8 +44,8 @@ class collabCtrl{
                         videoId: currentVid.src,
                         playerVars: {
                             controls: 1,
-                            disablekb: 1,
-                            rel : 0
+                            disablekb: 0,
+                            rel : 1
                         },
                         // Events like ready, state change, 
                         events: {
